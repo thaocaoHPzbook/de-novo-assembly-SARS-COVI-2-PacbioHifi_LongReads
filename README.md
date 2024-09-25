@@ -76,4 +76,4 @@ conda install -c conda-forge -c bioconda -c defaults canu
 conda activate canu_env
 ```
 
-**3tàn tàn mẹ . 
+**3. 
