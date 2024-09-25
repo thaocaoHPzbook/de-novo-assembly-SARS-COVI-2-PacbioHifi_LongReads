@@ -64,7 +64,47 @@ However, From the results of MultiQC results, there are several issues need furt
 
 # Estimation of required coverage
 **1. Reference genome**    
+```bash
+# Đặt biến HOME_PATH thành thư mục hiện tại
+HOME_PATH=`pwd`
+REF_PATH=$HOME_PATH/reference
+BWA_COMMAND=/home/hp/miniconda3/bin/bwa  # Đường dẫn mới đến BWA
+
+# Tạo thư mục reference
+mkdir -p $REF_PATH
+
+# Chuyển đến thư mục reference
+cd $REF_PATH
+
+# Tải xuống genome tham chiếu SARS-CoV-2
+wget http://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/wuhCor1.fa.gz
+
+# Giải nén tệp genome
+pigz -d wuhCor1.fa.gz
+
+# Tạo chỉ mục cho genome tham chiếu bằng BWA
+$BWA_COMMAND index wuhCor1.fa
+
+# Quay lại thư mục trước đó
+cd $HOME_PATH
+```
 **2. Normalization and coverage estimation process**
+*2.1. Install BBMAP*
+```bash
+conda create -n bbmap_env python=3.8
+conda activate bbmap_env
+```
+
+```bash
+conda install -c bioconda bbmap
+```
+*2.2. Create and run script normalize_fastq.sh*
+```bash
+nano normalize_fastq.sh
+```
+```bash
+chmod +x normalize_fastq.sh
+```
 
 # denovo assemble trimmed reads with Hicanu
 **1. Install Hicanu**
@@ -77,9 +117,9 @@ conda activate canu_env
 ```
 
 **3. run de novo assembly**
-*3.1 First pass and assessment at 100x*
 
-*2.2 Second pass and assessment at 200x and 300x*
+
+
 
 
 **4. completing the assemblies***
