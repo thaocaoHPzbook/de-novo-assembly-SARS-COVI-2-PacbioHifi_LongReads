@@ -17,12 +17,12 @@ find /home/hp/denovo_assembly_longreads -name "*.hifi_reads.fastq" | sed 's|.*/|
 chmod +r chmod +r IDs.list
 ```
 
-# Install multi QC
+# Quality control and filtering
+**0. Install multi QC**
 ```bash
 pip install multiqc
 ```
 
-# Quality control and filtering
 **1. reads QC**
 *1.1. create script file to run fastqc*
 ```bash
