@@ -130,7 +130,7 @@ conda activate canu_env
 **5. check the results**
 
 # Assessment the de novo assembly results by QUAST
-**1. N50**
-**2. L50**
-**3. total quantity of contigs**
-**4. number and size of gap**
+**1. N50**    
+**2. L50**    
+**3. total quantity of contigs**    
+**4. number and size of gap**    
