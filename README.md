@@ -25,4 +25,15 @@ pip install multiqc
 # Quality control and filtering
 **1. reads QC**
 *1.1. create script file to run fastqc*
+```bash
 nano run_fastqc.sh
+```
+*1.2 grant execution rights*
+```bash
+chmod +x run_fastqc.sh
+```
+*1.3. run the script*
+```bash
+./run_fastqc.sh
+```
+Read the report in file name **multiqc_report.html**
