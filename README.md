@@ -62,4 +62,17 @@ However, From the results of MultiQC results, there are several issues need furt
 3. High Sequences duplicated level (posible to handle by bioinformatics tools)
 4. High Overrepresented Sequences (posible to handle by bioinformatics tools)
 
+# Estimation of required coverage
+**1. Reference genome**
+**2. Normalization and coverage estimation process**
 
+# denovo assemble trimmed reads with Hicanu
+**1. Install Hicanu**
+```bash
+conda install -c conda-forge -c bioconda -c defaults canu
+```
+Active Hicanu by
+```bash
+conda activate canu_env
+```
+**2. 
