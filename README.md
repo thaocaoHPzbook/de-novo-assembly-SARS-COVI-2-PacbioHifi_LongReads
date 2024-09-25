@@ -76,4 +76,18 @@ conda install -c conda-forge -c bioconda -c defaults canu
 conda activate canu_env
 ```
 
-**3. 
+**3. run de novo assembly**
+*3.1 First pass and assessment at 100x*
+
+*2.2 Second pass and assessment at 200x and 300x*
+
+
+**4. completing the assemblies***
+
+**5. check the results**
+
+# Assessment the de novo assembly results by QUAST
+**1. N50**
+**2. L50**
+**3. total quantity of contigs**
+**4. number and size of gap**
