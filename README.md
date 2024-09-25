@@ -1,5 +1,4 @@
-# Download SARS-COVI-2 Hifi Omicron samples from Pacbio website *https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/?utm_source=Website&utm_medium=webpage&utm_term=SQII-omicron-samples&utm_content=datasets&utm_campaign=0000-Website-Leads*
-
+# Download SARS-COVI-2 Hifi Omicron samples from Pacbio website
 **1. making directory**
 ```bash
 mkdir -p denovo_assembly_longreads
