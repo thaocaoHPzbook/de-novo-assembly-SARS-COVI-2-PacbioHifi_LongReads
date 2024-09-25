@@ -18,7 +18,7 @@ find /home/hp/denovo_assembly_longreads -name "*.hifi_reads.fastq" | sed 's|.*/|
 chmod +r chmod +r IDs.list
 ```
 
-# Quality control and filtering
+# Quality control
 **0. Install multi QC**
 ```bash
 pip install multiqc
@@ -56,7 +56,6 @@ done < denovo_assembly_longreads/IDs_selected.list
 # Adapter and poor quality bases trimming
 Check the multi QC report, adapters were moved already.Only need to trim and filter the poor quality bases
 
-# Adapter and poor quality bases trimming, filtering
 Check the multi QC report, adapters were moved already.Only need to trim the poor quality bases.
 However, From the results of MultiQC results, there are several issues need further steps before de novo assembly:
 1. Per base sequence content (can not handle by bioinformatics tools)
