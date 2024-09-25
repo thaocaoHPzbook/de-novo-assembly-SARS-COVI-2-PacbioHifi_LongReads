@@ -54,7 +54,14 @@ done < denovo_assembly_longreads/IDs_selected.list
 ```
 
 # Adapter and poor quality bases trimming
-Check the multi QC report, adapters were moved already.Only need to trim the poor quality bases
+Check the multi QC report, adapters were moved already.Only need to trim and filter the poor quality bases
 
+# Adapter and poor quality bases trimming, filtering
+Check the multi QC report, adapters were moved already.Only need to trim the poor quality bases.
+However, From the results of MultiQC results, there are several issues need further steps before de novo assembly:
+1. Per base sequence content (can not handle by bioinformatics tools)
+2. Low GC contents(can not handle by bioinformatics tools)
+3. High Sequences duplicated level (posible to handle by bioinformatics tools)
+4. High Overrepresented Sequences (posible to handle by bioinformatics tools)
 
 
