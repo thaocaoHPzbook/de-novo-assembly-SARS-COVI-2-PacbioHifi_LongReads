@@ -71,8 +71,9 @@ However, From the results of MultiQC results, there are several issues need furt
 ```bash
 conda install -c conda-forge -c bioconda -c defaults canu
 ```
-Active Hicanu by
+**2. Active Hicanu**
 ```bash
 conda activate canu_env
 ```
-**2. 
+
+**3tàn tàn mẹ . 
