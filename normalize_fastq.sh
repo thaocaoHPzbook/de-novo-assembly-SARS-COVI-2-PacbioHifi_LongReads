@@ -1,11 +1,13 @@
+
 #!/bin/bash
 
 # Đường dẫn đến thư mục làm việc
 HOME_PATH=$(pwd)  # Sử dụng thư mục hiện tại
 FASTQ_PATH="$HOME_PATH/postQC_selected_samples"  # Thư mục chứa FASTQ
-BBNORM_TEST_OUTPUT="$HOME_PATH/bbnorm_test"  # Thư mục đầu ra
+BBNORM_TEST_OUTPUT="$HOME_PATH/bbnorm_test"
 
-BBNORM_COMMAND="/PATH/TO/bbmap/bbnorm.sh"  # Đường dẫn đến bbnorm.sh
+# Đường dẫn đến bbnorm.sh
+BBNORM_COMMAND="bbnorm.sh"  # Giả sử bbmap đã được cài đặt trong PATH
 THREADS=8  # Số luồng xử lý
 TARGET_COVERAGE=100  # Độ phủ mong muốn
 
@@ -16,7 +18,7 @@ fi
 
 # Lặp qua các tệp FASTQ
 for FILE in "$FASTQ_PATH"/*.fastq.gz; do
-    BASE=$(basename "$FILE" ".fastq.gz")  # Tên mẫu mà không có phần mở rộng
+    BASE=$(basename "$FILE" ".fastq.gz")  # Thay đổi nếu tên tệp khác
 
     echo "Processing sample: $BASE"
 
