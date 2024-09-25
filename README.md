@@ -37,3 +37,19 @@ chmod +x run_fastqc.sh
 ./run_fastqc.sh
 ```
 Read the report in file name **multiqc_report.html**
+
+*1.4. reads the multiQC report and filter the unquality samples*
+*1.4.1. Tạo tệp IDs_selected.list (containt quality files only)*
+```bash
+grep -vE 'A_A11R3.hifi_reads|A_G6R3.hifi_reads' denovo_assembly_longreads/IDs.list > denovo_assembly_longreads/Ids_selected.list
+```
+
+*1.4.2. create the directory and and moving the quality files to*
+```bash
+mkdir -p postQC_selected_samples/
+while read i; do
+    mv denovo_assembly_longreads/"$i" postQC_selected_samples/
+done < denovo_assembly_longreads/IDs_selected.list
+```
+
+
