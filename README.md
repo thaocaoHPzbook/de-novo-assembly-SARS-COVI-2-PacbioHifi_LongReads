@@ -105,6 +105,9 @@ nano normalize_fastq.sh
 ```bash
 chmod +x normalize_fastq.sh
 ```
+```bash
+./normalize_fastq.sh
+```
 
 # denovo assemble trimmed reads with Hicanu
 **1. Install Hicanu**
