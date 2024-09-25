@@ -63,7 +63,7 @@ However, From the results of MultiQC results, there are several issues need furt
 4. High Overrepresented Sequences (posible to handle by bioinformatics tools)
 
 # Estimation of required coverage
-**1. Reference genome**
+**1. Reference genome**    
 **2. Normalization and coverage estimation process**
 
 # denovo assemble trimmed reads with Hicanu
