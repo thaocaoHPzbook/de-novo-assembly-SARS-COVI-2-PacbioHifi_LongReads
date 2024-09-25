@@ -24,12 +24,12 @@ chmod +r chmod +r IDs.list
 pip install multiqc
 ```
 
-**1. reads QC**
+**1. reads QC**   
 *1.1. create script file to run fastqc*
 ```bash
 nano run_fastqc.sh
 ```
-*1.2 grant execution rights*
+*1.2 grant execution rights*    
 ```bash
 chmod +x run_fastqc.sh
 ```
@@ -37,10 +37,10 @@ chmod +x run_fastqc.sh
 ```bash
 ./run_fastqc.sh
 ```
-Read the report in file name **multiqc_report.html**
+Read the report in file name **multiqc_report.html**    
 
 *1.4. reads the multiQC report and filter the unquality samples*    
-*1.4.1. Tạo tệp IDs_selected.list (containt quality files only)*
+*1.4.1. Tạo tệp IDs_selected.list (containt quality files only)*   
 ```bash
 grep -vE 'A_A11R3.hifi_reads|A_G6R3.hifi_reads' denovo_assembly_longreads/IDs.list > denovo_assembly_longreads/Ids_selected.list
 ```
