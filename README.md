@@ -1,4 +1,5 @@
 # Download SARS-COVI-2 Hifi Omicron samples from Pacbio website
+https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/?utm_source=Website&utm_medium=webpage&utm_term=SQII-omicron-samples&utm_content=datasets&utm_campaign=0000-Website-Leads
 **1. making directory**
 ```bash
 mkdir -p denovo_assembly_longreads
@@ -51,5 +52,9 @@ while read i; do
     mv denovo_assembly_longreads/"$i" postQC_selected_samples/
 done < denovo_assembly_longreads/IDs_selected.list
 ```
+
+# Adapter and poor quality bases trimming
+Check the multi QC report, adapters were moved already.Only need to trim the poor quality bases
+
 
 
