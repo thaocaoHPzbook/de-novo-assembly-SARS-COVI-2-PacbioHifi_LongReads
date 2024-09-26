@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Đường dẫn đến thư mục làm việc
@@ -6,13 +7,19 @@ FASTQ_PATH="$HOME_PATH/postQC_selected_samples"  # Thư mục chứa FASTQ
 BBNORM_TEST_OUTPUT="$HOME_PATH/bbnorm_test"
 
 # Đường dẫn đến bbnorm.sh
-BBNORM_COMMAND="/home/hp/miniconda3/bin/bbnorm.sh"  # Giả sử bbmap đã được cài đặt trong PATH
+BBNORM_COMMAND="/home/hp/miniconda3/bin/bbnorm.sh"  # Đảm bảo bbmap đã được cài đặt tại đây
 THREADS=8  # Số luồng xử lý
 TARGET_COVERAGE=100  # Độ phủ mong muốn
 
 # Kiểm tra và tạo thư mục đầu ra nếu chưa tồn tại
 if [ ! -d "$BBNORM_TEST_OUTPUT" ]; then
     mkdir -p "$BBNORM_TEST_OUTPUT"
+fi
+
+# Kiểm tra có tệp FASTQ nào không
+if [ -z "$(ls $FASTQ_PATH/*.fastq.gz 2>/dev/null)" ]; then
+    echo "Không tìm thấy tệp FASTQ nào trong thư mục: $FASTQ_PATH"
+    exit 1
 fi
 
 # Lặp qua các tệp FASTQ
