@@ -42,7 +42,7 @@ Read the report in file name **multiqc_report.html**
 *1.4. reads the multiQC report and filter the unquality samples*    
 *1.4.1. Tạo tệp IDs_selected.list (containt quality files only)*   
 ```bash
-grep -vE 'A_A11R3.hifi_reads|A_G6R3.hifi_reads' denovo_assembly_longreads/IDs.list > denovo_assembly_longreads/Ids_selected.list
+grep -vE 'A_A11R3.hifi_reads|A_G6R3.hifi_reads|A_D3R5.hifi_reads|A_C5R4.hifi_reads|A_B6R3.hifi_reads|C_G6R3.hifi_reads' denovo_assembly_longreads/IDs.list > denovo_assembly_longreads/Ids_selected.list
 ```
 
 *1.4.2. create the directory and and moving the quality files to*
