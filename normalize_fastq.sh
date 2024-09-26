@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Đường dẫn đến thư mục làm việc
