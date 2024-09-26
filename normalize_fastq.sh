@@ -6,7 +6,7 @@ FASTQ_PATH="$HOME_PATH/postQC_selected_samples"  # Thư mục chứa FASTQ
 BBNORM_TEST_OUTPUT="$HOME_PATH/bbnorm_test"
 
 # Đường dẫn đến bbnorm.sh
-BBNORM_COMMAND="bbnorm.sh"  # Giả sử bbmap đã được cài đặt trong PATH
+BBNORM_COMMAND="/home/hp/miniconda3/bin/bbnorm.sh"  # Giả sử bbmap đã được cài đặt trong PATH
 THREADS=8  # Số luồng xử lý
 TARGET_COVERAGE=100  # Độ phủ mong muốn
 
