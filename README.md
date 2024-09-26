@@ -98,6 +98,8 @@ conda activate bbmap_env
 ```bash
 conda install -c bioconda bbmap
 ```
+
+
 *2.2. Create and run script normalize_fastq.sh*
 ```bash
 nano normalize_fastq.sh
