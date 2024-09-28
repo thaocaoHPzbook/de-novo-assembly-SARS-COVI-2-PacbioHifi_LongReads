@@ -126,9 +126,6 @@ conda activate canu_env
 canu -p sarscov2_assembly -d hicanu_output genomeSize=30k -pacbio-hifi bbnorm_test/*reads_norm.fastq.gz maxThreads=8 maxMemory=16G minInputCoverage=1
 ````
 
-
-
-
 **4. completing the assemblies***
 
 **5. check the results**
