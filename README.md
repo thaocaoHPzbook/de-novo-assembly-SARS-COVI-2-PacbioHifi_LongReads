@@ -129,9 +129,25 @@ canu -p sarscov2_assembly -d hicanu_output genomeSize=30k -pacbio-hifi bbnorm_te
 **4. completing the assemblies***
 
 **5. check the results**
-
+quast Results/Covid_19.contigs.fasta -o quast_output
 # Assessment the de novo assembly results by QUAST
 **1. N50**    
 **2. L50**    
 **3. total quantity of contigs**    
 **4. number and size of gap**    
+
+# Remove haplotypes using the Purge_dups tool
+**1. Install Purge_dups tool**
+conda create -n purge_dups_env python=3.8 //create new env
+conda activate purge_dups_env //activate new env
+conda install -c bioconda purge_dups //install dependecies
+purge_dups --help //check installation results
+
+**2. Run Purge_dups**
+*2.1 Step 1. Run minimap2 to align pacbio data and generate paf files, then calculate read depth histogram and base-level read depth*
+
+*2.2 Step 1. Split an assembly and do a self-self alignment*
+
+
+
+
