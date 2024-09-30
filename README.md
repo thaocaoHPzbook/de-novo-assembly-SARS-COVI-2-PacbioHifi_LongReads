@@ -136,6 +136,51 @@ quast Results/Covid_19.contigs.fasta -o quast_output
 **3. total quantity of contigs**    
 **4. number and size of gap**    
 
+# Polishing
+**1. align raw reads with an assembly using Minimap2**
+*1.1 Instatll minimap2*
+```bash
+conda create -n minimap2_env //create new env
+conda create -n minimap2_env //active new env
+conda install -c bioconda minimap2 //install minimap2
+minimap2 --version //check installation results
+```
+
+*1.2. Combine all input fastq file*
+cd postQC_selected_samples
+```bash
+cat *.hifi_reads.fastq > combined_reads.fastq
+```
+
+*1.3. Run minimap2*
+```bash
+minimap2 -ax map-hifi Covid_19.contigs.fasta combined_reads.fastq > aligned_reads.sam
+```
+
+**2. Polishing with racon**
+*1.1. Install Racon*
+```bash
+conda create -n racon_env //create new env
+conda activate racon_env //active new env
+racon --version //check installation results
+```
+
+*1.2. Run Racon*
+```bash
+cd home/hp/thao/Pacbio_hifi/align_minimap2
+mkdir racon_output
+conda activate racon_env 
+racon combined_reads.fastq aligned_reads.sam Covid_19.contigs.fasta > racon_output/Covid_19.contigs.polished.fasta
+```
+
+# QC after polishing with QUAST
+```bash
+cd home/hp/thao/Pacbio_hifi/align_minimap2/
+conda activate quast_env
+quast Covid_19.contigs.fasta -o quast_after_polising_output /racon_output Covid_19.contigs.polished.fasta -o quast_output
+
+
+
 # Remove haplotypes using the Purge_dups tool
 **1. Install Purge_dups tool**
 conda create -n purge_dups_env python=3.8 //create new env
