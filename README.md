@@ -177,7 +177,8 @@ racon combined_reads.fastq aligned_reads.sam Covid_19.contigs.fasta > racon_outp
 ```bash
 cd home/hp/thao/Pacbio_hifi/align_minimap2/
 conda activate quast_env
-quast Covid_19.contigs.fasta -o quast_after_polising_output /racon_output Covid_19.contigs.polished.fasta -o quast_output
+quast Covid_19.contigs.fasta -o quast_after_polishing_output racon_output/Covid_19.contigs.polished.fasta -o quast_output
+```
 
 
 
@@ -188,11 +189,40 @@ conda activate purge_dups_env //activate new env
 conda install -c bioconda purge_dups //install dependecies
 purge_dups --help //check installation results
 
+*link github - guidance on how to us Purge_dups tool*
+```bash
+https://github.com/dfguan/purge_dups
+```
+*pipeline of # Remove haplotypes using the Purge_dups tool*
+![image](https://github.com/user-attachments/assets/635ef16c-7491-4d03-9b25-323769970c83)
+
+
 **2. Run Purge_dups**
-*2.1 Step 1. Run minimap2 to align pacbio data and generate paf files, then calculate read depth histogram and base-level read depth*
+*2.1 Step 1: Generate an index for the input sequence**
+Use minimap2 to generate an alignment file (paf file) for the assembly
+```bash
+cd /home/hp/Pacbio_hifi/align_minimap2/racon_output
+minimap2 -x asm5 -DP Covid_19.contigs.polished.fasta Covid_19.contigs.polished.fasta > alignments.paf
+```
 
-*2.2 Step 1. Split an assembly and do a self-self alignment*
+*2.2. Step 2: Calculate read depth histogram and base-level read depth (tính toán độ sâu cho mỗi contigs)*
+```bash
+conda install -c bioconda pb-assembly //install PB-Tools
+conda activate purge_dups_env
+pbcstat alignments.paf
+```
 
+*2.3. Step 3: Phân tích haplotig* 
+#Sử dụng kết quả từ bước trước để phân tích haplotig và đánh dấu các bản sao dư thừa với lệnh calcuts:
+calcuts PB.stat > cutoffs
+
+#Bước 4: Xóa các haplotig dư thừa
+#Sử dụng tệp cắt (cutoffs) và căn chỉnh ban đầu để thực hiện việc xóa các bản sao haplotype dư thừa bằng lệnh purge_dups:
+purge_dups -2 -T cutoffs alignments.paf > dups.bed
+
+#Bước 5: Tạo tệp FASTA đầu ra không chứa haplotig dư thừa
+#Sau khi có tệp dups.bed chứa các vị trí của các bản sao có thể tạo tệp FASTA mới mà không chứa haplotig dư thừa:
+purge_dups -c dups.bed Covid_19.contigs.polished.fasta > Covid_19.contigs.cleaned.fasta
 
 
 
