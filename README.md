@@ -212,6 +212,15 @@ conda activate purge_dups_env
 pbcstat alignments.paf
 ```
 
+Không thành công nên sử dụng tool (minimap2) khác để tính toán reads depth
+```bash
+/home/hp/Pacbio_hifi/align_minimap2/racon_output/calculate_readdepth_samtools
+minimap2 -ax map-pb Covid_19.contigs.polished.fasta /home/hp/Pacbio_hifi/postQC_selected_samples/*.fastq | samtools view -bS - > output.bam
+samtools view -h output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print; else print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11}' > output.paf
+pbcstat output.paf (chưa làm)
+```
+
+
 *2.3. Step 3: Phân tích haplotig* 
 #Sử dụng kết quả từ bước trước để phân tích haplotig và đánh dấu các bản sao dư thừa với lệnh calcuts:
 calcuts PB.stat > cutoffs
