@@ -196,7 +196,6 @@ https://github.com/dfguan/purge_dups
 *pipeline of # Remove haplotypes using the Purge_dups tool*
 ![image](https://github.com/user-attachments/assets/635ef16c-7491-4d03-9b25-323769970c83)
 
-
 **2. Run Purge_dups**
 *2.1 Step 1: Generate an index for the input sequence**
 Use minimap2 to generate an alignment file (paf file) for the assembly
@@ -212,26 +211,52 @@ conda activate purge_dups_env
 pbcstat alignments.paf
 ```
 
-Không thành công nên sử dụng tool (minimap2) khác để tính toán reads depth
+*2.3. Step 3: Analyse haplotig* 
+#Sử dụng kết quả từ bước trước (depmth.txt) để phân tích haplotig và đánh dấu các bản sao dư thừa với lệnh calcuts:
 ```bash
-/home/hp/Pacbio_hifi/align_minimap2/racon_output/calculate_readdepth_samtools
-minimap2 -ax map-pb Covid_19.contigs.polished.fasta /home/hp/Pacbio_hifi/postQC_selected_samples/*.fastq | samtools view -bS - > output.bam
-samtools view -h output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print; else print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11}' > output.paf
-pbcstat output.paf (chưa làm)
+conda activate purge_dups_env
+calcuts depth.txt > cutoffs
+```
+hoặc sử dụng lệnh dưới đâu nếu tính độ sâu bằng PB-Tools ở bước trên
+```bash
+calcuts PB.stat > cutoffs
 ```
 
-
-*2.3. Step 3: Phân tích haplotig* 
-#Sử dụng kết quả từ bước trước để phân tích haplotig và đánh dấu các bản sao dư thừa với lệnh calcuts:
-calcuts PB.stat > cutoffs
-
 #Bước 4: Xóa các haplotig dư thừa
+
 #Sử dụng tệp cắt (cutoffs) và căn chỉnh ban đầu để thực hiện việc xóa các bản sao haplotype dư thừa bằng lệnh purge_dups:
+```bash
 purge_dups -2 -T cutoffs alignments.paf > dups.bed
+
 
 #Bước 5: Tạo tệp FASTA đầu ra không chứa haplotig dư thừa
 #Sau khi có tệp dups.bed chứa các vị trí của các bản sao có thể tạo tệp FASTA mới mà không chứa haplotig dư thừa:
 purge_dups -c dups.bed Covid_19.contigs.polished.fasta > Covid_19.contigs.cleaned.fasta
 
+
+or *alternative tool (minimap2) to calculate reads depth*
+```bash
+/home/hp/Pacbio_hifi/align_minimap2/racon_output/calculate_readdepth_samtools
+minimap2 -ax map-pb Covid_19.contigs.polished.fasta /home/hp/Pacbio_hifi/postQC_selected_samples/*.fastq | samtools view -bS - > output.bam
+samtools view -h output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print; else print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11}' > output.paf
+samtools sort -o sorted_output.bam output.bam //sắp xếp file BAM theo vị trí genome
+samtools depth -a sorted_output.bam > depth.txt //tính độ sâu với tệp bam đã sắp xếp
+```
+
+# Tính giá trị cutoff
+avg_depth=$(awk '{sum += $3; count++} END {print sum/count}' depth.txt | sed 's/,/./')
+echo "Giá trị trung bình là: $avg_depth"
+cutoff_value=$(echo "$avg_depth * 0.75" | bc)  # Ví dụ, bạn có thể lấy 75% giá trị trung bình
+echo "Giá trị cutoff là: $cutoff_value"
+*kêt quả cutoff value là  15179.77
+# # Tạo tệp độ sâu từ depth.txt
+cut -f1 depth.txt > depth_file.txt
+# tạo tệp cutoff
+echo "15179.77" > cutoffs.txt
+# Chạy lệnh Purge Dups:
+purge_dups -b sorted_output.bam -c depth_file.txt -T cutoffs.txt output.paf
+
+
+Bước 5: Tạo tệp FASTA đầu ra không chứa haplotig dư thừa
 
 
