@@ -210,7 +210,7 @@ samtools depth -a sorted_output.bam > depth.txt //tính độ sâu với tệp b
 ```bash
 avg_depth=$(awk '{sum += $3; count++} END {print sum/count}' depth.txt | sed 's/,/./')
 echo "Giá trị trung bình là: $avg_depth"
-cutoff_value=$(echo "$avg_depth * 0.75" | bc)  # Ví dụ, bạn có thể lấy 75% giá trị trung bình
+cutoff_value=$(echo "$avg_depth * 0.75" | bc)  # Ví dụ, lấy 75% giá trị trung bình
 echo "Giá trị cutoff là: $cutoff_value"
 ```
 
@@ -248,4 +248,23 @@ samtools view -h sorted_output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print;
 conda create -n pbmm2_env python=3.8
 conda activate pbmm2_env
 conda install -c bioconda pbmm2
+```
+**2. Create the directory and moving the downloaded reference genome to thís directory**
+```bash
+mkdir mapping_pbmm2
+```
+
+**3. Create index**
+```bash
+pbmm2 index wuhCor1.fa wuhCor1.fa.mmi
+```
+
+**4. Mapping raw reads**
+```bash
+for read in /home/hp/Pacbio_hifi/postQC_selected_samples/*.fastq; do
+    base_name=$(basename "$read" .fastq)
+    output_file="/home/hp/Pacbio_hifi/mapping_pbmm2/${base_name}.bam"
+
+    pbmm2 align wuhCor1.fa "$read" -o "$output_file" --sort --preset CCS --sample "$base_name" --rg "@RG\tID:$base_name"
+done
 ```
