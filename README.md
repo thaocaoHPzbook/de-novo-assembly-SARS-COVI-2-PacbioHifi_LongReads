@@ -241,3 +241,11 @@ purge_dups \
 ```bash
 samtools view -h sorted_output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print; else if(!($1 in deleted_reads)) print;}' > kept_reads.bam
 ```
+
+# Align PacBio reads to a reference genome by pbmm2
+**1. Install pbmm2**
+```bash
+conda create -n pbmm2_env python=3.8
+conda activate pbmm2_env
+conda install -c bioconda pbmm2
+```
