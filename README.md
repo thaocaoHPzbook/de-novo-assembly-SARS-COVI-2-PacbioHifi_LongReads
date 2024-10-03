@@ -88,7 +88,7 @@ $BWA_COMMAND index wuhCor1.fa
 # Quay lại thư mục trước đó
 cd $HOME_PATH
 ```
-**2. Normalization and coverage estimation process**
+**2. Normalization and coverage estimation process**    
 *2.1. Install BBMAP*
 ```bash
 conda create -n bbmap_env python=3.8
@@ -196,7 +196,7 @@ https://github.com/dfguan/purge_dups
 *pipeline of # Remove haplotypes using the Purge_dups tool*
 ![image](https://github.com/user-attachments/assets/635ef16c-7491-4d03-9b25-323769970c83)
 
-**2. Run Purge_dups (manually)**
+**2. Run Purge_dups (manually)**    
 *2.1. Step 1: Calculate read depth histogram and base-level read depth by  (tính toán độ sâu cho mỗi contigs)*
 ```bash
 /home/hp/Pacbio_hifi/align_minimap2/racon_output/calculate_readdepth_samtools
