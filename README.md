@@ -180,7 +180,7 @@ conda activate quast_env
 quast Covid_19.contigs.fasta -o quast_after_polishing_output racon_output/Covid_19.contigs.polished.fasta -o quast_output
 ```
 
-# Remove haplotypes using the Purge_dups tool
+# Purge haplotigs using the Purge_dups tool
 **1. Install Purge_dups tool**
 conda create -n purge_dups_env python=3.8 //create new env
 conda activate purge_dups_env //activate new env
