@@ -180,8 +180,6 @@ conda activate quast_env
 quast Covid_19.contigs.fasta -o quast_after_polishing_output racon_output/Covid_19.contigs.polished.fasta -o quast_output
 ```
 
-
-
 # Remove haplotypes using the Purge_dups tool
 **1. Install Purge_dups tool**
 conda create -n purge_dups_env python=3.8 //create new env
@@ -243,6 +241,7 @@ samtools view -h sorted_output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print;
 ```
 
 # Align PacBio reads to a reference genome by pbmm2
+workflow https://github.com/PacificBiosciences/pbsv/blob/master/img/pbsv-stage-workflow.png
 **1. Install pbmm2**
 ```bash
 conda create -n pbmm2_env python=3.8
@@ -266,5 +265,20 @@ for read in /home/hp/Pacbio_hifi/postQC_selected_samples/*.fastq; do
     output_file="/home/hp/Pacbio_hifi/mapping_pbmm2/${base_name}.bam"
     
     pbmm2 align wuhCor1.fa "$read" "$output_file" --rg "@RG\tID:${base_name}\tSM:${base_name}"
+done
+```
+# Discover signatures of structural variation by pbsv
+**1. Install 
+conda create -n pbsv_env python=3.8
+conda activate pbsv_env
+conda install -c conda-forge pbsv
+
+```bash
+for bam_file in /home/hp/Pacbio_hifi/mapping_pbmm2/*.bam; do
+    base_name=$(basename "$bam_file" .bam)
+    output_file="/home/hp/Pacbio_hifi/mapping_pbmm2/${base_name}.svsig.gz"
+    
+    # Chạy pbsv discover
+    pbsv discover "$bam_file" "$output_file" --tandem-repeats path/to/tandem_repeats.bed
 done
 ```
