@@ -264,7 +264,7 @@ pbmm2 index wuhCor1.fa wuhCor1.fa.mmi
 for read in /home/hp/Pacbio_hifi/postQC_selected_samples/*.fastq; do
     base_name=$(basename "$read" .fastq)
     output_file="/home/hp/Pacbio_hifi/mapping_pbmm2/${base_name}.bam"
-
-    pbmm2 align wuhCor1.fa "$read" -o "$output_file" --sort --preset CCS --sample "$base_name" --rg "@RG\tID:$base_name"
+    
+    pbmm2 align wuhCor1.fa "$read" "$output_file" --rg "@RG\tID:${base_name}\tSM:${base_name}"
 done
 ```
