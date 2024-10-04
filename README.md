@@ -157,7 +157,7 @@ cat *.hifi_reads.fastq > combined_reads.fastq
 minimap2 -ax map-hifi Covid_19.contigs.fasta combined_reads.fastq > aligned_reads.sam
 ```
 
-**2. Polishing with racon**
+**2. Polishing with racon**    
 *1.1. Install Racon*
 ```bash
 conda create -n racon_env //create new env
