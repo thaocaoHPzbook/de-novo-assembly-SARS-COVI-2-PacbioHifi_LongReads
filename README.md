@@ -240,6 +240,16 @@ purge_dups \
 samtools view -h sorted_output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print; else if(!($1 in deleted_reads)) print;}' > kept_reads.bam
 ```
 
+# Scafolding with longstich
+```bash
+conda create -n ragoo_env python=3.8
+conda activate ragoo_env
+conda install -c bioconda ragoo
+
+
+
+
+
 # Align PacBio reads to a reference genome by pbmm2
 workflow https://github.com/PacificBiosciences/pbsv/blob/master/img/pbsv-stage-workflow.png
 **1. Install pbmm2**
