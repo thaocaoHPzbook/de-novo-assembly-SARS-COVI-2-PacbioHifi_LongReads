@@ -240,11 +240,15 @@ purge_dups \
 samtools view -h sorted_output.bam | awk 'BEGIN {OFS="\t"} {if($1 ~ /^@/) print; else if(!($1 in deleted_reads)) print;}' > kept_reads.bam
 ```
 
-# Scafolding with longstich
+# Scafolding with ragoo
+**1. Install ragoo by git clone by SSH
 ```bash
-conda create -n ragoo_env python=3.8
-conda activate ragoo_env
-conda install -c bioconda ragoo
+git clone https://github.com/schatzlab/ragoo.git
+```
+```bash
+ragoo -R combined_hifi_reads.fastq -T sr Covid_19.contigs.polished.fasta wuhCor1.fa
+```
+
 
 
 
